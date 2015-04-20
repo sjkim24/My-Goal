@@ -1,0 +1,23 @@
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
+
+development:
+  adapter: postgresql
+  database: MyGoal_dev
+  host: localhost
+  username: appacademy
+
+test:
+  <<: *default
+  database: MyGoal_test
+
+
+#
+production:
+  <<: *default
+  database: MyGoal_production
