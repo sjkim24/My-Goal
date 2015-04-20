@@ -21,7 +21,7 @@ feature "the signup process" do
     end
 
     scenario "shows homepage after signup" do
-      expect(page).to have_content "Home"
+      expect(page).to have_content "All Goals"
     end
 
   end
@@ -48,7 +48,7 @@ feature "logging in" do
     end
 
     scenario "shows homepage after login" do
-      expect(page).to have_content "Home"
+      expect(page).to have_content "All Goals"
     end
 
     scenario "has a logout button on homepage after login" do
