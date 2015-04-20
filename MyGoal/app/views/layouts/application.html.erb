@@ -8,6 +8,20 @@
 </head>
 <body>
 
+  <% if logged_in? %>
+    <%= current_user.username %>
+    <form action="<%= new_session_url %>" method="post">
+      <%= csrf_html %>
+      <input type="hidden" name="_method" value="delete">
+      <button>Log Out</button>
+    </form>
+  <% else %>
+    <a href="<%= new_session_url %>">Log In</a>
+    <a href="<%= new_user_url %>">Create User</a>
+  <% end %>
+
+  <%= render 'shared/errors' %>
+
 <%= yield %>
 
 </body>

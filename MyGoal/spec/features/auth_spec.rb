@@ -5,7 +5,7 @@ feature "the signup process" do
 
   scenario "has a new user page" do
     visit new_user_url
-    expect(page).to have_content "New user"
+    expect(page).to have_content "New User"
   end
 
   feature "signing up a user" do
@@ -32,7 +32,7 @@ feature "logging in" do
 
   scenario "has a login page" do
     visit new_session_url
-    expect(page).to have_content "Log in"
+    expect(page).to have_content "Log In"
   end
 
   feature "logging in a user" do
