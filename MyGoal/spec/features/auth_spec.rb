@@ -35,7 +35,6 @@ feature "logging in" do
   feature "logging in a user" do
     before(:each) do
       sign_up
-      log_in
     end
 
     scenario "shows Username on the homepage after login" do
@@ -82,7 +81,6 @@ feature "logging out" do
 
   before(:each) do
     sign_up
-    log_in
     click_button "Log Out"
   end
 

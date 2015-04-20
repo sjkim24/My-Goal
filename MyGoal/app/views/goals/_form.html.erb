@@ -1,0 +1,24 @@
+<form action="<%= url %>" method="post">
+  <input type="hidden" name="_method" value="<%= method %>">
+  <%= csrf_html %>
+  <label>
+    Title
+    <input type="text" name="goal[title]" value="<%= goal.title %>">
+  </label>
+  <br>
+  <label>
+    Body
+    <textarea name="goal[body]"><%= goal.body %></textarea>
+  </label>
+  <br>
+  <label>Public
+    <input type="radio" name="goal[private]" value="false"
+    <%= @goal.private ? "" : "checked" %>>
+  </label>
+  <br>
+  <label>Private
+    <input type="radio" name="goal[private]" value="true"
+    <%= @goal.private ? "checked" : "" %>>
+  </label>
+  <button><%= button %></button>
+</form>
