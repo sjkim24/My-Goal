@@ -27,9 +27,14 @@ def log_in
   click_button "Log In"
 end
 
+def log_out
+  click_button 'Log Out'
+end
+
 def make_goal(title = nil, body = nil, scope = 'Private')
   title ||= "Succeed"
   body ||= "Finish App Academy and get job"
+  scope ||= 'Public'
 
   visit new_goal_url
   fill_in 'Title', with: title

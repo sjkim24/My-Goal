@@ -21,5 +21,38 @@ feature "create a goal" do
     make_goal
     expect(page).to have_content "Succeed"
   end
+end
+
+feature "goals index" do
+  before(:each) do
+    sign_up
+    make_goal
+    make_goal(title = 'Exercise', body = 'Get healthy!', scope = 'Private')
+    log_out
+  end
+
+  scenario "shows all public goals" do
+    visit goals_url
+    expect(page).to have_content "Succeed"
+    expect(page).to have_content "testing_username"
+  end
+
+  scenario "does not show private goals" do
+    visit goals_url
+    expect(page).not_to have_content "Exercise"
+  end
+end
+
+feature "user show page" do
+  before(:each) do
+    sign_up
+    make_goal
+    make_goal(title = 'Exercise', body = 'Get healthy!', scope = 'Private')
+  end
+
+  scenario "all user's goals show up on show page" do
+    expect(page).to have_content "Succeed"
+    expect(page).to have_content "Exercise"
+  end
 
 end
