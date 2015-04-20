@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
 
+  has_many :goals
+
   def self.generate_random_token
     SecureRandom.urlsafe_base64(16)
   end
@@ -15,14 +17,16 @@ class User < ActiveRecord::Base
     user && user.is_password?(password) ? user : nil
   end
 
-  def is_password?(password)
-    BCrypt::Password.new(self.password_digest).is_password?(password)
-  end
-
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)
   end
+
+  def is_password?(password)
+    BCrypt::Password.new(self.password_digest).is_password?(password)
+  end
+
+
 
   def reset_session_token!
     self.session_token = self.class.generate_random_token

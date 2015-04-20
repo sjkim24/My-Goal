@@ -5,15 +5,12 @@ feature "the signup process" do
 
   scenario "has a new user page" do
     visit new_user_url
-    expect(page).to have_content "New User"
+    expect(page).to have_content "Create User"
   end
 
   feature "signing up a user" do
     before(:each) do
-      visit new_user_url
-      fill_in 'Username', :with => 'testing_username'
-      fill_in 'Password', :with => 'biscuits'
-      click_on "Create User"
+      sign_up
     end
 
     scenario "shows Username on the homepage after signup" do
@@ -37,10 +34,8 @@ feature "logging in" do
 
   feature "logging in a user" do
     before(:each) do
-      visit new_session_url
-      fill_in 'Username', :with => 'testing_username'
-      fill_in 'Password', :with => 'biscuits'
-      click_on "Log In"
+      sign_up
+      log_in
     end
 
     scenario "shows Username on the homepage after login" do
@@ -59,22 +54,22 @@ feature "logging in" do
 
   feature "incorrect login" do
 
-    scenario "redirects to login page for nonexistent Username"
+    scenario "redirects to login page for nonexistent Username" do
       visit new_session_url
       fill_in 'Username', :with => 'testing'
       fill_in 'Password', :with => 'biscuits'
-      click_on "Log In"
+      click_button "Log In"
 
       expect(page).to have_content "Log In"
       expect(page).to have_content "Username"
       expect(page).to have_content "Password"
     end
 
-    scenario "redirects to login page for incorrect password"
+    scenario "redirects to login page for incorrect password" do
       visit new_session_url
       fill_in 'Username', :with => 'testing_username'
       fill_in 'Password', :with => 'bis'
-      click_on "Log In"
+      click_button "Log In"
 
       expect(page).to have_content "Log In"
       expect(page).to have_content "Username"
@@ -86,25 +81,23 @@ end
 feature "logging out" do
 
   before(:each) do
-    visit new_session_url
-    fill_in 'Username', :with => 'testing_username'
-    fill_in 'Password', :with => 'biscuits'
-    click_on "Log In"
-    click_on "Log Out"
+    sign_up
+    log_in
+    click_button "Log Out"
   end
 
   scenario "begins with logged out state" do
     expect(page).to have_content "Log In"
-    expect(page).to have_content "New User"
+    expect(page).to have_content "Create User"
   end
 
   scenario "doesn't show Username on the homepage after logout" do
-    visit users_url
+    visit goals_url
     expect(page).not_to have_content "testing_username"
   end
 
   scenario "doesn't show logout button after logging out" do
-    visit users_url
+    visit goals_url
     expect(page).not_to have_content "Log Out"
   end
 

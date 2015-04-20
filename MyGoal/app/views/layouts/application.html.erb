@@ -2,15 +2,13 @@
 <html>
 <head>
   <title>MyGoal</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
   <% if logged_in? %>
     <%= current_user.username %>
-    <form action="<%= new_session_url %>" method="post">
+    <form action="<%= session_url %>" method="post">
       <%= csrf_html %>
       <input type="hidden" name="_method" value="delete">
       <button>Log Out</button>
